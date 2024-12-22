@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Botstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="static/styles/styles.css">
+    <!-- fontawesome kit -->
+    <script src="https://kit.fontawesome.com/2f9bd23a36.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Baba</title>
+    <!-- favicon NOT WORKING -->
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon_io/favicon.ico">
+</head>
+
+<body>
+    <video autoplay muted loop id="background-video">
+        <source src="/static/images/Images/<%=data.weather[0].icon%>.mp4" type="video/mp4">
+    </video>
+
+    <section>
+        <div class="mainDiv container-fluid d-flex justify-content-center">
+
+            <div class="card mb-4 mt-4 gradient-custom py-3"
+                style="border-radius: 25px; width: fit-content; padding: 2%;">
+
+                <div class="card-body">
+                    <h6 style="text-align: center;"><i class="fa-solid fa-location-dot"></i>
+                        <%=data.name%>, <%=data.sys.country%>
+                    </h6>
+                    <p id="dateNow" class="text-muted mb-0" style="text-align: center;">
+                        <%=formatDate(calcTime(data.timezone /3600))%>
+                    </p>
+                    <center><img class="mb-0" id="WeatherImage"
+                            src="http://openweathermap.org/img/wn/<%=data.weather[0].icon%>@2x.png" alt="WeatherImage">
+                    </center>
+                    <h1 style="text-align: center;">
+                        <%=Math.round(data.main.temp-273.15)%>°C
+                    </h1>
+                    <!--<p style="text-align: center;">{AQI}</p>-->
+                    <br>
+                    <!--<p class="text-muted mb-0">{tempMin}°C / {tempMax}°C</p>-->
+                    <p class="text-muted mb-0">Feels like <%=Math.round(data.main.feels_like-273.15)%>°C</p>
+                    <p class="text-muted mb-0">
+                        <%=data.weather[0].desc%>
+                    </p>
+                </div>
+
+                <hr>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted mb-0">Sunrise:</p>
+                            <p class="text-muted">
+                                <%=formatTime(data.sys.sunrise)%>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-muted mb-0">Sunset:</p>
+                            <p class="text-muted">
+                                <%=formatTime(data.sys.sunset)%>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted mb-0">Pressure:</p>
+                            <p class="text-muted">
+                                <%=data.main.pressure%> mbar
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-muted mb-0">Humidity:</p>
+                            <p class="text-muted">
+                                <%=data.main.humidity%>%
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted mb-0">Wind Speed:</p>
+                            <p class="text-muted">
+                                <%=data.wind.speed%> m/s
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-muted mb-0">Visibility:</p>
+                            <p class="text-muted">
+                                <%=data.visibility%>m
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--<script src="static/js/index.js"></script>-->
+
+</body>
+
+</html>
